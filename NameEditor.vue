@@ -1,13 +1,12 @@
 <template>
-  <div>
+  <div style="border: 1px solid red;">
     <p>
-      First name:
-      <input v-model="editableFirstName" />
-      Last name:
-      <input v-model="editableLastName" />      
+      first name:
+      <input v-model="firstName" />
     </p>
-    <p><strong>Output:</strong><br/>
-      {{ editableFirstName + ' ' + editableLastName }}
+    <p>
+      last name:
+      <input v-model="lastName" />
     </p>
   </div>
 </template>
@@ -16,20 +15,39 @@
 export default {
   name: 'NameEditor',
   data () {
+    const [firstName = '', lastName = ''] = this.value.split(' ')
     return {
-      editableFirstName: this.firstName,
-      editableLastName: this.lastName
+      firstName,
+      lastName
     }
   },
   props: {
-    firstName: {
+    value: {
       type: String,
-      default: 'John'
+      default: 'John Doe'
+    }
+  },
+  watch: {
+    joinedName () {
+      this.setFullName()
     },
-    lastName: {
-      type: String,
-      default: 'Doe'
-    }    
+    value () {
+      const [firstName = '', lastName = ''] = this.value.split(' ')
+      this.firstName = firstName
+      this.lastName = lastName
+    }
+  },
+  computed: {
+    joinedName () {
+      return [this.firstName, this.lastName]
+        .filter((item) => item !== '')
+        .join(' ')
+    }
+  },
+  methods: {
+    setFullName () {
+      this.$emit('input', this.joinedName)
+    }
   }
 }
 </script>
