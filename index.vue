@@ -22,16 +22,14 @@ Vytvorte komponentu DeliveryAddressEditor pre editáciu dodcej adresy, ktorú do
 Zrecyklujte editory adresy a mena.
 */
 
-import NameEditor from './NameEditor'
-import AddressEditor from './AddressEditor'
 import DeliveryAddressEditor from './DeliveryAddressEditor'
 
 export default {
-  components: { AddressEditor, NameEditor },
+  components: { DeliveryAddressEditor },
   data: function () {
     return {
       deliveryAddress: {
-        name: 'John Doe',
+        name: 'Johnik Doeik',
         address: 'U garáží 1611/1',
         city: 'Praha',
         zip: '17000'
